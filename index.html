@@ -1,0 +1,1055 @@
+<!doctype html>
+<html lang="kk">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta property="og:title" content="Мадияр & Еркежан үйлену тойына шақыру!" />
+        <meta property="og:description" content="12.12.2026" />
+        <meta
+            property="og:image"
+            content="https://raw.githubusercontent.com/Invitation-kz/Madiyar-Yerkezhan-12.12.2026/main/photo.jpg"
+        />
+        <title>Мадияр & Еркежан үйлену тойына шақыру!</title>
+
+        <!-- Шрифт Lora (кириллица + казахские буквы) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap&subset=cyrillic,cyrillic-ext"
+            rel="stylesheet"
+        />
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            :root {
+                --font: "Lora", Georgia, "Times New Roman", serif;
+            }
+
+            /* Единый шрифт для всей страницы */
+            html,
+            body,
+            button,
+            input,
+            textarea,
+            label,
+            span,
+            h2 {
+                font-family: var(--font);
+            }
+            body {
+                overflow-x: hidden;
+            }
+            img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+            a {
+                display: block;
+            }
+
+            body::before {
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url("fon.jpg");
+                background-size: cover;
+                background-position: center center;
+                z-index: -1;
+            }
+
+            /* Фотолардың пайда болу анимациясы */
+            .element-animation {
+                opacity: 0;
+                transition: opacity 1.2s ease;
+            }
+            .element-animation.element-show {
+                opacity: 1;
+            }
+
+            .arrow-container {
+                display: flex;
+                justify-content: center;
+                margin: 20px 0;
+            }
+
+            .arrow-container img {
+                width: 100px; /* меняй размер по вкусу */
+                height: auto;
+            }
+
+            /* ТАЙМЕР */
+            .timer-wrapper {
+                position: relative;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 30px;
+            }
+            .countdown-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px 20px;
+                padding: 10px 20px;
+            }
+            .countdown-item {
+                text-align: center;
+                display: inline-block;
+                min-width: 40px;
+            }
+            .countdown-item .number {
+                display: block;
+                font-size: clamp(2.2rem, 8vw, 3.5rem);
+                font-weight: 300;
+                color: #3c5a1c;
+                letter-spacing: 2px;
+                line-height: 1;
+            }
+            .countdown-item .label {
+                display: block;
+                font-size: clamp(0.6rem, 1.5vw, 0.9rem);
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                color: #3c5a1c;
+                margin-top: 4px;
+                font-weight: 300;
+            }
+            .countdown-divider {
+                font-size: clamp(1.5rem, 5vw, 3rem);
+                font-weight: 100;
+                color: #3c5a1c;
+                padding-top: 5px;
+                display: inline-block;
+            }
+
+            /* ===== Форма ответа (как в пригласительном Жибек) ===== */
+            .form-wrapper {
+                padding: 10px 0 30px;
+            }
+            #form {
+                display: block;
+                width: 100%;
+                max-width: 380px;
+                margin: 0 auto;
+                padding: 0 24px;
+                box-sizing: border-box;
+                text-align: left;
+            }
+
+            .form-inner {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .radio-group {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+                margin: 0 0 6px;
+            }
+
+            .radio-option {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                padding: 13px 18px;
+                background: rgba(255, 255, 255, 0.65);
+                border: 1px solid rgba(60, 90, 28, 0.25);
+                border-radius: 14px;
+                cursor: pointer;
+                transition:
+                    background-color 0.2s ease,
+                    border-color 0.2s ease,
+                    box-shadow 0.2s ease;
+            }
+            .radio-option:hover {
+                border-color: rgba(60, 90, 28, 0.55);
+            }
+            .radio-option:has(input:checked) {
+                background: #ffffff;
+                border-color: #3c5a1c;
+                box-shadow: 0 0 0 1px #3c5a1c;
+            }
+            .radio-option:has(input:focus-visible) {
+                outline: 2px solid #8aa66a;
+                outline-offset: 2px;
+            }
+            .radio-option input[type="radio"] {
+                flex: none;
+                width: 20px;
+                height: 20px;
+                margin: 0;
+                accent-color: #3c5a1c;
+                cursor: pointer;
+            }
+            .radio-option label {
+                flex: 1;
+                margin: 0;
+                padding: 0;
+                font-size: 18px;
+                line-height: 1.3;
+                color: #2a3d14;
+                text-transform: none;
+                letter-spacing: 0.01em;
+                cursor: pointer;
+            }
+
+            .form-inner textarea {
+                display: block;
+                width: 100%;
+                height: 52px;
+                padding: 13px 18px;
+                margin: 0;
+                box-sizing: border-box;
+                resize: none;
+                font-size: 18px;
+                line-height: 1.3;
+                color: #2a3d14;
+                background-color: #ffffff;
+                border: 1px solid rgba(60, 90, 28, 0.35);
+                border-radius: 14px;
+                letter-spacing: 0.01em;
+            }
+            .form-inner textarea::placeholder {
+                color: rgba(42, 61, 20, 0.5);
+            }
+            .form-inner textarea:focus {
+                outline: none;
+                border-color: #3c5a1c;
+                box-shadow: 0 0 0 1px #3c5a1c;
+            }
+
+            .form-inner input[type="submit"] {
+                display: block;
+                width: 100%;
+                height: 52px;
+                margin: 4px 0 0;
+                padding: 0 20px;
+                font-size: 18px;
+                font-weight: 500;
+                letter-spacing: 0.06em;
+                color: #f4f7ec;
+                background: linear-gradient(160deg, #4f7a26 0%, #3c5a1c 55%, #2b4012 100%);
+                border: 1px solid #8aa66a;
+                border-radius: 14px;
+                box-shadow: 0 8px 20px rgba(60, 90, 28, 0.3);
+                cursor: pointer;
+                transition:
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease,
+                    opacity 0.2s ease;
+            }
+            .form-inner input[type="submit"]:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 24px rgba(60, 90, 28, 0.4);
+            }
+            .form-inner input[type="submit"]:active {
+                transform: scale(0.98);
+            }
+            .form-inner input[type="submit"]:focus-visible {
+                outline: 2px solid #8aa66a;
+                outline-offset: 3px;
+            }
+            .form-inner input[type="submit"]:disabled {
+                opacity: 0.6;
+                cursor: default;
+                transform: none;
+            }
+
+            .form-status {
+                min-height: 26px;
+                margin: 2px 0 0;
+                text-align: center;
+                font-size: 18px;
+                color: #3c5a1c;
+                opacity: 0;
+                transform: translateY(6px);
+                transition:
+                    opacity 0.3s ease,
+                    transform 0.3s ease;
+            }
+            .form-status.show {
+                opacity: 1;
+                transform: none;
+            }
+
+            /* ===== Модальное окно (как в пригласительном Жибек) ===== */
+            .modal {
+                display: block; /* Модальное окно отображается сразу */
+                position: fixed;
+                z-index: 9999; /* Модальное окно поверх всех элементов */
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.8); /* Затемнённый фон */
+                overflow-y: auto;
+            }
+            .modal-content {
+                background-color: #f3f1e6;
+                margin: 15vh auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 400px;
+                text-align: center;
+            }
+            .modal-content img {
+                width: 100%;
+                height: auto;
+            }
+
+            /* Кнопка «Шақыртуды ашу» */
+            #playMusic {
+                position: relative;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 18px;
+                padding: 14px 38px;
+                font-family: var(--font);
+                font-size: 18px;
+                font-weight: 500;
+                letter-spacing: 0.06em;
+                color: #f4f7ec;
+                background: linear-gradient(160deg, #4f7a26 0%, #3c5a1c 55%, #2b4012 100%);
+                border: 1px solid #8aa66a;
+                border-radius: 999px;
+                box-shadow:
+                    0 0 0 4px rgba(138, 166, 106, 0.25),
+                    0 8px 20px rgba(60, 90, 28, 0.35);
+                cursor: pointer;
+                transition:
+                    transform 0.25s ease,
+                    box-shadow 0.25s ease;
+                animation: invitePulse 2.4s ease-in-out infinite;
+            }
+            #playMusic::before {
+                content: "♪";
+                font-size: 20px;
+                color: #c5d8a8;
+            }
+            #playMusic:hover {
+                transform: translateY(-2px);
+                box-shadow:
+                    0 0 0 5px rgba(138, 166, 106, 0.35),
+                    0 12px 26px rgba(60, 90, 28, 0.45);
+            }
+            #playMusic:active {
+                transform: translateY(0) scale(0.97);
+            }
+            #playMusic:focus-visible {
+                outline: 2px solid #8aa66a;
+                outline-offset: 4px;
+            }
+            @keyframes invitePulse {
+                0%,
+                100% {
+                    box-shadow:
+                        0 0 0 4px rgba(138, 166, 106, 0.25),
+                        0 8px 20px rgba(60, 90, 28, 0.35);
+                }
+                50% {
+                    box-shadow:
+                        0 0 0 10px rgba(138, 166, 106, 0),
+                        0 8px 20px rgba(60, 90, 28, 0.35);
+                }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                #playMusic {
+                    animation: none;
+                }
+            }
+
+            /* Отключение скроллинга страницы */
+            body.modal-open {
+                overflow: hidden;
+            }
+
+            /* САКУРА / ЛЕПЕСТКИ */
+            .sakura {
+                pointer-events: none;
+                position: fixed;
+            }
+
+            @-webkit-keyframes fall {
+                0% {
+                    opacity: 0.9;
+                    top: 0;
+                }
+                100% {
+                    opacity: 0.2;
+                    top: 100%;
+                }
+            }
+            @keyframes fall {
+                0% {
+                    opacity: 0.9;
+                    top: 0;
+                }
+                100% {
+                    opacity: 0.2;
+                    top: 100%;
+                }
+            }
+            @-webkit-keyframes blow-soft-left {
+                0% {
+                    margin-left: 0;
+                }
+                100% {
+                    margin-left: -50%;
+                }
+            }
+            @keyframes blow-soft-left {
+                0% {
+                    margin-left: 0;
+                }
+                100% {
+                    margin-left: -50%;
+                }
+            }
+            @-webkit-keyframes blow-medium-left {
+                0% {
+                    margin-left: 0;
+                }
+                100% {
+                    margin-left: -100%;
+                }
+            }
+            @keyframes blow-medium-left {
+                0% {
+                    margin-left: 0;
+                }
+                100% {
+                    margin-left: -100%;
+                }
+            }
+            @-webkit-keyframes blow-soft-right {
+                0% {
+                    margin-left: 0;
+                }
+                100% {
+                    margin-left: 50%;
+                }
+            }
+            @keyframes blow-soft-right {
+                0% {
+                    margin-left: 0;
+                }
+                100% {
+                    margin-left: 50%;
+                }
+            }
+            @-webkit-keyframes blow-medium-right {
+                0% {
+                    margin-left: 0;
+                }
+                100% {
+                    margin-left: 100%;
+                }
+            }
+            @keyframes blow-medium-right {
+                0% {
+                    margin-left: 0;
+                }
+                100% {
+                    margin-left: 100%;
+                }
+            }
+            @-webkit-keyframes sway-0 {
+                0% {
+                    -webkit-transform: rotate(-5deg);
+                    transform: rotate(-5deg);
+                }
+                40% {
+                    -webkit-transform: rotate(28deg);
+                    transform: rotate(28deg);
+                }
+                100% {
+                    -webkit-transform: rotate(3deg);
+                    transform: rotate(3deg);
+                }
+            }
+            @keyframes sway-0 {
+                0% {
+                    transform: rotate(-5deg);
+                }
+                40% {
+                    transform: rotate(28deg);
+                }
+                100% {
+                    transform: rotate(3deg);
+                }
+            }
+            @-webkit-keyframes sway-1 {
+                0% {
+                    transform: rotate(10deg);
+                }
+                40% {
+                    transform: rotate(43deg);
+                }
+                100% {
+                    transform: rotate(15deg);
+                }
+            }
+            @keyframes sway-1 {
+                0% {
+                    transform: rotate(10deg);
+                }
+                40% {
+                    transform: rotate(43deg);
+                }
+                100% {
+                    transform: rotate(15deg);
+                }
+            }
+            @-webkit-keyframes sway-2 {
+                0% {
+                    transform: rotate(15deg);
+                }
+                40% {
+                    transform: rotate(56deg);
+                }
+                100% {
+                    transform: rotate(22deg);
+                }
+            }
+            @keyframes sway-2 {
+                0% {
+                    transform: rotate(15deg);
+                }
+                40% {
+                    transform: rotate(56deg);
+                }
+                100% {
+                    transform: rotate(22deg);
+                }
+            }
+            @-webkit-keyframes sway-3 {
+                0% {
+                    transform: rotate(25deg);
+                }
+                40% {
+                    transform: rotate(74deg);
+                }
+                100% {
+                    transform: rotate(37deg);
+                }
+            }
+            @keyframes sway-3 {
+                0% {
+                    transform: rotate(25deg);
+                }
+                40% {
+                    transform: rotate(74deg);
+                }
+                100% {
+                    transform: rotate(37deg);
+                }
+            }
+            @-webkit-keyframes sway-4 {
+                0% {
+                    transform: rotate(40deg);
+                }
+                40% {
+                    transform: rotate(68deg);
+                }
+                100% {
+                    transform: rotate(25deg);
+                }
+            }
+            @keyframes sway-4 {
+                0% {
+                    transform: rotate(40deg);
+                }
+                40% {
+                    transform: rotate(68deg);
+                }
+                100% {
+                    transform: rotate(25deg);
+                }
+            }
+            @-webkit-keyframes sway-5 {
+                0% {
+                    transform: rotate(50deg);
+                }
+                40% {
+                    transform: rotate(78deg);
+                }
+                100% {
+                    transform: rotate(40deg);
+                }
+            }
+            @keyframes sway-5 {
+                0% {
+                    transform: rotate(50deg);
+                }
+                40% {
+                    transform: rotate(78deg);
+                }
+                100% {
+                    transform: rotate(40deg);
+                }
+            }
+            @-webkit-keyframes sway-6 {
+                0% {
+                    transform: rotate(65deg);
+                }
+                40% {
+                    transform: rotate(92deg);
+                }
+                100% {
+                    transform: rotate(58deg);
+                }
+            }
+            @keyframes sway-6 {
+                0% {
+                    transform: rotate(65deg);
+                }
+                40% {
+                    transform: rotate(92deg);
+                }
+                100% {
+                    transform: rotate(58deg);
+                }
+            }
+            @-webkit-keyframes sway-7 {
+                0% {
+                    transform: rotate(72deg);
+                }
+                40% {
+                    transform: rotate(118deg);
+                }
+                100% {
+                    transform: rotate(68deg);
+                }
+            }
+            @keyframes sway-7 {
+                0% {
+                    transform: rotate(72deg);
+                }
+                40% {
+                    transform: rotate(118deg);
+                }
+                100% {
+                    transform: rotate(68deg);
+                }
+            }
+            @-webkit-keyframes sway-8 {
+                0% {
+                    transform: rotate(94deg);
+                }
+                40% {
+                    transform: rotate(136deg);
+                }
+                100% {
+                    transform: rotate(82deg);
+                }
+            }
+            @keyframes sway-8 {
+                0% {
+                    transform: rotate(94deg);
+                }
+                40% {
+                    transform: rotate(136deg);
+                }
+                100% {
+                    transform: rotate(82deg);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Модальное окно -->
+        <div id="musicModal" class="modal">
+            <div class="modal-content">
+                <img src="photo.jpg" alt="приглашение" />
+                <button id="playMusic" type="button">Шақыртуды ашу</button>
+            </div>
+        </div>
+
+        <!-- АУДИО -->
+        <audio id="backgroundMusic" loop preload="auto">
+            <source src="music.mp3" type="audio/mpeg" />
+            Ваш браузер не поддерживает воспроизведение музыки.
+        </audio>
+
+        <!-- ФОТО 1 -->
+        <div class="element-animation"><img src="photo1.png" alt="photo1" /></div>
+
+        <div class="element-animation arrow-container">
+            <img src="arrow.gif" alt="arrow" />
+        </div>
+
+        <!-- ФОТО 3 -->
+        <div class="element-animation"><img src="photo2.png" alt="photo2" /></div>
+
+        <!-- ФОТО 4 -->
+        <div class="element-animation"><img src="photo3.png" alt="photo3" /></div>
+
+        <!-- ФОТО 5 -->
+        <div class="element-animation"><img src="photo4.png" alt="photo4" /></div>
+
+        <!-- ФОТО 5 -->
+        <div class="element-animation"><img src="photo5.png" alt="photo5" /></div>
+
+        <!-- ФОТО 6 -->
+        <div class="element-animation"><img src="photo6.png" alt="photo6" /></div>
+
+        <!-- ТАЙМЕР -->
+        <div class="timer-wrapper element-animation">
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <span class="number" id="days">00</span>
+                    <span class="label">Күн</span>
+                </div>
+                <span class="countdown-divider">:</span>
+                <div class="countdown-item">
+                    <span class="number" id="hours">00</span>
+                    <span class="label">Сағат</span>
+                </div>
+                <span class="countdown-divider">:</span>
+                <div class="countdown-item">
+                    <span class="number" id="minutes">00</span>
+                    <span class="label">Минут</span>
+                </div>
+                <span class="countdown-divider">:</span>
+                <div class="countdown-item">
+                    <span class="number" id="seconds">00</span>
+                    <span class="label">Секунд</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ФОТО 7 (КАРТА) -->
+        <div class="element-animation">
+            <a href="https://2gis.kz/semej/firm/70000001060983833" target="_blank">
+                <img src="photo7.png" alt="photo7" />
+            </a>
+        </div>
+
+        <!-- ФОТО 8 -->
+        <div class="element-animation"><img src="photo8.png" alt="photo8" /></div>
+
+        <!-- ОПРОС -->
+        <div class="form-wrapper">
+            <center style="margin-top: 0px">
+                <form class="transparent" method="post" id="form">
+                    <div class="form-inner">
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="question1_yes" name="name" value="Иә барамын" required />
+                                <label for="question1_yes">Иә барамын</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="question1_no" name="name" value="Бара алмаймын" required />
+                                <label for="question1_no">Бара алмаймын</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="question1_maybe" name="name" value="Әзірге белгісіз" required />
+                                <label for="question1_maybe">Әзірге белгісіз</label>
+                            </div>
+                        </div>
+                        <textarea
+                            required
+                            name="message"
+                            maxlength="100"
+                            id="message"
+                            cols="30"
+                            rows="1"
+                            placeholder="Есіміңізді жазыңыз"
+                        ></textarea>
+                        <input type="submit" value="Жіберу" />
+                        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+                    </div>
+                </form>
+            </center>
+        </div>
+
+        <!-- ФОТО 9 (INSTAGRAM) -->
+        <div class="element-animation">
+            <a href="https://www.instagram.com/toiga_shaqyrtugo/" target="_blank">
+                <img src="photo9.png" alt="photo9" />
+            </a>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const modal = document.getElementById("musicModal");
+                const playBtn = document.getElementById("playMusic");
+                const audio = document.getElementById("backgroundMusic");
+
+                function openInvitation() {
+                    audio.play().catch(function (err) {
+                        console.warn("Не удалось запустить музыку:", err);
+                    });
+
+                    // Закрываем модальное окно и разблокируем прокрутку
+                    modal.style.display = "none";
+                    document.body.classList.remove("modal-open");
+
+                    document.querySelectorAll(".element-animation").forEach(function (el) {
+                        el.classList.add("element-show");
+                    });
+                }
+
+                playBtn.addEventListener("click", openInvitation);
+
+                // Фотолардың бірте-бірте пайда болуы
+                const observer = new IntersectionObserver(
+                    function (entries) {
+                        entries.forEach(function (entry) {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add("element-show");
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    },
+                    { threshold: 0.1 },
+                );
+                document.querySelectorAll(".element-animation").forEach(function (el) {
+                    observer.observe(el);
+                });
+
+                // ТАЙМЕР
+                function updateCountdown() {
+                    const endDate = new Date("December 12, 2026 18:00:00").getTime();
+                    const now = Date.now();
+                    const distance = endDate - now;
+
+                    if (distance < 0) {
+                        document.getElementById("days").textContent = "00";
+                        document.getElementById("hours").textContent = "00";
+                        document.getElementById("minutes").textContent = "00";
+                        document.getElementById("seconds").textContent = "00";
+                        return;
+                    }
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    document.getElementById("days").textContent = String(days).padStart(2, "0");
+                    document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+                    document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+                    document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+                }
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
+            });
+        </script>
+
+        <script>
+            // Сюда вставьте ссылку веб-приложения Apps Script (заканчивается на /exec)
+            const URL_APP =
+                "https://script.google.com/macros/s/AKfycbwmI-gvyIotbSEd8wE2n1ypPjOS3IYjL49TDFRmiw9mlx74VnfXnriNnzjVAGaetqoS/exec";
+
+            const form = document.querySelector("#form");
+            const statusEl = document.querySelector("#formStatus");
+            let statusTimer;
+
+            form.action = URL_APP;
+
+            // Мгновенный ответ гостю
+            function showThanks() {
+                statusEl.textContent = "Жауабыңызға рахмет!";
+                statusEl.classList.add("show");
+                clearTimeout(statusTimer);
+                statusTimer = setTimeout(() => statusEl.classList.remove("show"), 5000);
+            }
+
+            // Отправка в таблицу в фоне (гость её не ждёт), до 3 попыток при сбое сети
+            function sendInBackground(body, attempt = 1) {
+                fetch(URL_APP, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+                    mode: "no-cors",
+                    body: body,
+                    keepalive: true, // запрос дойдёт, даже если гость закроет страницу
+                }).catch(err => {
+                    console.error("Error:", err);
+                    if (attempt < 3) {
+                        setTimeout(() => sendInBackground(body, attempt + 1), 2000 * attempt);
+                    }
+                });
+            }
+
+            form.addEventListener("submit", ev => {
+                ev.preventDefault();
+
+                const checked = form.querySelector("[name=name]:checked");
+                const name = checked ? checked.value : "";
+                const message = form.querySelector("[name=message]").value.trim();
+
+                if (!name || !message) {
+                    alert("Жауабыңызды таңдап, есіміңізді жазыңыз");
+                    return;
+                }
+
+                const body = new URLSearchParams({ name, message }).toString();
+
+                form.reset();
+                showThanks();
+                sendInBackground(body);
+            });
+        </script>
+
+        <!-- ЛЕПЕСТКИ (sakura.js) -->
+        <script>
+            "use strict";
+            var Sakura = function Sakura(selector, options) {
+                var _this = this;
+                if (typeof selector === "undefined") {
+                    throw new Error("No selector present. Define an element.");
+                }
+                this.el = document.querySelector(selector);
+                var defaults = {
+                    className: "sakura",
+                    fallSpeed: 1,
+                    maxSize: 14,
+                    minSize: 10,
+                    delay: 300,
+                    colors: [
+                        {
+                            gradientColorStart: "rgba(60, 90, 28, 0.85)",
+                            gradientColorEnd: "rgba(111, 138, 83, 0.85)",
+                            gradientColorDegree: 120,
+                        },
+                    ],
+                };
+                var extend = function extend(originalObj, newObj) {
+                    Object.keys(originalObj).forEach(function (key) {
+                        if (newObj && Object.prototype.hasOwnProperty.call(newObj, key)) {
+                            originalObj[key] = newObj[key];
+                        }
+                    });
+                    return originalObj;
+                };
+                this.settings = extend(defaults, options);
+                this.el.style.overflowX = "hidden";
+
+                function randomArrayElem(arr) {
+                    return arr[Math.floor(Math.random() * arr.length)];
+                }
+                function randomInt(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+
+                var prefixes = ["webkit", "moz", "MS", "o", ""];
+                function PrefixedEvent(element, type, callback) {
+                    for (var p = 0; p < prefixes.length; p += 1) {
+                        var animType = type;
+                        if (!prefixes[p]) {
+                            animType = type.toLowerCase();
+                        }
+                        element.addEventListener(prefixes[p] + animType, callback, false);
+                    }
+                }
+
+                function elementInViewport(el) {
+                    var rect = el.getBoundingClientRect();
+                    return (
+                        rect.top >= 0 &&
+                        rect.left >= 0 &&
+                        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                    );
+                }
+
+                this.createPetal = function () {
+                    if (_this.el.dataset.sakuraAnimId) {
+                        setTimeout(function () {
+                            window.requestAnimationFrame(_this.createPetal);
+                        }, _this.settings.delay);
+                    }
+                    var animationNames = {
+                        blowAnimations: ["blow-soft-left", "blow-medium-left", "blow-soft-right", "blow-medium-right"],
+                        swayAnimations: [
+                            "sway-0",
+                            "sway-1",
+                            "sway-2",
+                            "sway-3",
+                            "sway-4",
+                            "sway-5",
+                            "sway-6",
+                            "sway-7",
+                            "sway-8",
+                        ],
+                    };
+                    var blowAnimation = randomArrayElem(animationNames.blowAnimations);
+                    var swayAnimation = randomArrayElem(animationNames.swayAnimations);
+                    var fallTime =
+                        (document.documentElement.clientHeight * 0.007 + Math.round(Math.random() * 5)) *
+                        _this.settings.fallSpeed;
+                    var animationsArr = [
+                        "fall " + fallTime + "s linear 0s 1",
+                        blowAnimation +
+                            " " +
+                            ((fallTime > 30 ? fallTime : 30) - 20 + randomInt(0, 20)) +
+                            "s linear 0s infinite",
+                        swayAnimation + " " + randomInt(2, 4) + "s linear 0s infinite",
+                    ];
+                    var animations = animationsArr.join(", ");
+
+                    var petal = document.createElement("div");
+                    petal.classList.add(_this.settings.className);
+                    var height = randomInt(_this.settings.minSize, _this.settings.maxSize);
+                    var width = height - Math.floor(randomInt(0, _this.settings.minSize) / 3);
+                    var color = randomArrayElem(_this.settings.colors);
+                    petal.style.background =
+                        "linear-gradient(" +
+                        color.gradientColorDegree +
+                        "deg, " +
+                        color.gradientColorStart +
+                        ", " +
+                        color.gradientColorEnd +
+                        ")";
+                    petal.style.webkitAnimation = animations;
+                    petal.style.animation = animations;
+                    petal.style.borderRadius =
+                        randomInt(_this.settings.maxSize, _this.settings.maxSize + Math.floor(Math.random() * 10)) +
+                        "px " +
+                        randomInt(1, Math.floor(width / 4)) +
+                        "px";
+                    petal.style.height = height + "px";
+                    petal.style.left = Math.random() * document.documentElement.clientWidth - 100 + "px";
+                    petal.style.marginTop = -(Math.floor(Math.random() * 20) + 15) + "px";
+                    petal.style.width = width + "px";
+
+                    PrefixedEvent(petal, "AnimationEnd", function () {
+                        if (!elementInViewport(petal)) {
+                            petal.remove();
+                        }
+                    });
+                    PrefixedEvent(petal, "AnimationIteration", function () {
+                        if (!elementInViewport(petal)) {
+                            petal.remove();
+                        }
+                    });
+
+                    _this.el.appendChild(petal);
+                };
+
+                this.el.setAttribute("data-sakura-anim-id", window.requestAnimationFrame(this.createPetal));
+            };
+
+            document.addEventListener("DOMContentLoaded", function () {
+                new Sakura("body", { delay: 50 });
+            });
+        </script>
+    </body>
+</html>
